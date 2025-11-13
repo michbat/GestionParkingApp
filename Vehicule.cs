@@ -15,16 +15,22 @@ public abstract class Vehicule(string immatriculation, DateTime heureEntree)
     /// Utilisé comme identifiant unique pour le véhicule.
     /// </summary>
     public string Immatriculation { get; set; } = immatriculation;
-    
+
     /// <summary>
     /// Heure d'entrée du véhicule dans le parking.
     /// Utilisée pour calculer la durée de stationnement.
     /// </summary>
     public DateTime HeureEntree { get; private set; } = heureEntree;
-    
+
     /// <summary>
     /// Heure de sortie du véhicule du parking.
     /// Null tant que le véhicule est encore stationné.
     /// </summary>
     public DateTime? HeureSortie { get; private set; }
+
+    /// <summary>
+    /// Montant des frais de stationnement calculés pour le véhicule.
+    /// Varie selon le type de véhicule et la durée de stationnement.
+    /// </summary>
+    public double Frais { get; private set; }
 }
