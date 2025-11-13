@@ -11,7 +11,17 @@ public class Parking
     /// Utilise readonly pour empêcher la réassignation de la collection.
     /// </summary>
     private readonly List<Vehicule> vehicules = [];
-    
+
+    /// <summary>
+    /// Propriété en lecture seule exposant la collection des véhicules stationnés.
+    /// Permet l'accès externe sans modification directe de la collection privée.
+    /// </summary>
+    public List<Vehicule> Vehicules => vehicules;
+    // public List<Vehicule> Vehicules {
+    //     get { return vehicules; }
+    // }
+
+
     /// <summary>
     /// Nom du fichier CSV utilisé pour la persistance des données de stationnement.
     /// </summary>
@@ -21,15 +31,17 @@ public class Parking
     /// Ajoute un véhicule à la liste des véhicules stationnés et sauvegarde automatiquement.
     /// </summary>
     /// <param name="vehicule">Le véhicule à ajouter au parking</param>
+
+
     public void AjouterVehicule(Vehicule vehicule)
     {
         // Ajout du véhicule à la collection
         vehicules.Add(vehicule);
-        
+
         // Sauvegarde immédiate pour persister les modifications
         SauvegarderVehicules();
     }
-    
+
     /// <summary>
     /// Sauvegarde la liste des véhicules dans le fichier CSV.
     /// Format: Immatriculation,HeureEntree,Frais

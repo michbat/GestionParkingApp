@@ -26,7 +26,7 @@ class Program
 
             // Affichage du titre
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("==== Gestion de parking ====\n");
+            Console.WriteLine("==== Gestion de parking ====");
             Console.ResetColor();
 
             // Menu des options disponibles
@@ -35,7 +35,7 @@ class Program
             Console.WriteLine("2. Afficher les véhicules");
             Console.WriteLine("3. Retirer un véhicule");
             Console.WriteLine("4. Consulter les places disponibles et les gains");
-            Console.WriteLine("5. Quitter");
+            Console.WriteLine("5. Quitter le menu");
             Console.ResetColor();
 
             Console.Write("\nChoisissez une option : ");
@@ -48,7 +48,7 @@ class Program
                     AjouterVehicule(parking);
                     break;
                 case "2":
-                    // TODO: Implémenter ListerVehicules()
+                    AfficherVehicules(parking);
                     break;
                 case "3":
                     // TODO: Implémenter RetirerVehicule()
@@ -73,7 +73,7 @@ class Program
             if (continuer)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine("Appuyer sur n'importe quelle touche pour reafficher le menu...");
+                Console.WriteLine("\nAppuyer sur n'importe quelle touche pour reafficher le menu...");
                 Console.ResetColor();
                 Console.ReadKey();
             }
@@ -97,7 +97,7 @@ class Program
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
         string? immatriculation;
-        
+
         // Validation de l'immatriculation avec boucle de contrôle
         do
         {
@@ -115,7 +115,7 @@ class Program
 
         // Affichage du menu de sélection du type de véhicule
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("==== Type de véhicule ====\n");
+        Console.WriteLine("==== Type de véhicule ====");
         Console.WriteLine("1. Voiture");
         Console.WriteLine("2. Moto");
         Console.Write("\nChoisissez le type de véhicule (1 ou 2) : ");
@@ -153,6 +153,28 @@ class Program
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\nVéhicule ajouté avec succès !");
         Console.ResetColor();
+
+    }
+
+    /// <summary>
+    /// Affiche la liste de tous les véhicules actuellement stationnés dans le parking.
+    /// Utilise la propriété publique Vehicules pour accéder aux données.
+    /// </summary>
+    /// <param name="parking">Instance du parking dont afficher les véhicules</param>
+    static void AfficherVehicules(Parking parking)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("==== Véhicules stationnés ====");
+        Console.ResetColor();
+
+        // Parcours et affichage de chaque véhicule stationné
+        foreach (var v in parking.Vehicules)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Immatriculation : {v.Immatriculation} - Entrée : {v.HeureEntree}");
+            Console.ResetColor();
+        }
 
     }
 }
