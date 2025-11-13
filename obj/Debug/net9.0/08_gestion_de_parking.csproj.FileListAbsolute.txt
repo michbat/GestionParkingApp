@@ -1,0 +1,14 @@
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/bin/Debug/net9.0/08_gestion_de_parking
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/bin/Debug/net9.0/08_gestion_de_parking.deps.json
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/bin/Debug/net9.0/08_gestion_de_parking.runtimeconfig.json
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/bin/Debug/net9.0/08_gestion_de_parking.dll
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/bin/Debug/net9.0/08_gestion_de_parking.pdb
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.GeneratedMSBuildEditorConfig.editorconfig
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.AssemblyInfoInputs.cache
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.AssemblyInfo.cs
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.csproj.CoreCompileInputs.cache
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.dll
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/refint/08_gestion_de_parking.dll
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.pdb
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.genruntimeconfig.cache
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/ref/08_gestion_de_parking.dll
