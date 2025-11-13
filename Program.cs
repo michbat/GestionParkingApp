@@ -78,6 +78,9 @@ class Program
             }
         }
 
+        // Sauvegarde finale avant fermeture de l'application
+        parking.SauvegarderVehicules();
+
         // Pause avant fermeture complète
         Thread.Sleep(2000);
         Console.Clear();

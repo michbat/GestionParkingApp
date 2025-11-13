@@ -31,7 +31,7 @@ public class Parking
     /// Sauvegarde la liste des véhicules dans le fichier CSV.
     /// Format: Immatriculation,HeureEntree,Frais
     /// </summary>
-    private void SauvegarderVehicules()
+    public void SauvegarderVehicules()
     {
         using StreamWriter writer = new(FichierCSV);
 
