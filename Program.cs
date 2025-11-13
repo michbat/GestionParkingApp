@@ -15,7 +15,8 @@ class Program
         // Initialisation du parking et chargement des données existantes
         Parking parking = new();
         parking.ChargerVehicules();
-        const int capaciteMax = 50; // TODO: Utiliser pour vérifier la capacité avant ajout
+        // Note: La constante capaciteMax n'est plus nécessaire car la logique 
+        // de vérification de capacité est maintenant dans la classe Parking
 
         bool continuer = true;
 
@@ -90,6 +91,7 @@ class Program
     /// <summary>
     /// Interface utilisateur pour ajouter un véhicule au parking.
     /// Collecte l'immatriculation et le type de véhicule via la console.
+    /// Utilise la nouvelle méthode AjouterVehicule qui gère automatiquement la vérification de capacité.
     /// </summary>
     /// <param name="parking">Instance du parking où ajouter le véhicule</param>
     static void AjouterVehicule(Parking parking)
@@ -97,6 +99,15 @@ class Program
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
         string? immatriculation;
+
+        // Vérification préliminaire de la disponibilité (optionnelle pour UX)
+        if (parking.EstPlein)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nLe parking est plein. Impossible d'ajouter de nouveaux véhicules.\n");
+            Console.ResetColor();
+            return;
+        }
 
         // Validation de l'immatriculation avec boucle de contrôle
         do
@@ -147,12 +158,22 @@ class Program
             return;
         }
 
-        // Ajout du véhicule au parking
-        parking.AjouterVehicule(vehicule);
+        // Tentative d'ajout du véhicule au parking avec vérification automatique
+        if (parking.AjouterVehicule(vehicule))
+        {
+            // Succès de l'ajout
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nVéhicule ajouté avec succès !");
+            Console.ResetColor();
+        }
+        else
+        {
+            // Échec de l'ajout (parking plein)
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nParking plein. Impossible d'ajouter le véhicule !");
+            Console.ResetColor();
+        }
 
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\nVéhicule ajouté avec succès !");
-        Console.ResetColor();
 
     }
 

@@ -7,6 +7,10 @@
 public class Parking
 {
     /// <summary>
+    /// Capacité maximale du parking en nombre de véhicules.
+    /// </summary>
+    private const int CAPACITE_MAX = 50;
+    /// <summary>
     /// Liste des véhicules actuellement stationnés dans le parking.
     /// Utilise readonly pour empêcher la réassignation de la collection.
     /// </summary>
@@ -28,18 +32,32 @@ public class Parking
     private const string FichierCSV = "parking.csv";
 
     /// <summary>
+    /// Propriété en lecture seule indiquant si le parking a atteint sa capacité maximale.
+    /// </summary>
+    /// <returns>True si le parking est plein, False sinon</returns>
+    public bool EstPlein => vehicules.Count >= CAPACITE_MAX;
+
+    /// <summary>
     /// Ajoute un véhicule à la liste des véhicules stationnés et sauvegarde automatiquement.
+    /// Vérifie d'abord si le parking a encore de la place disponible.
     /// </summary>
     /// <param name="vehicule">Le véhicule à ajouter au parking</param>
-
-
-    public void AjouterVehicule(Vehicule vehicule)
+    /// <returns>True si l'ajout a réussi, False si le parking est plein</returns>
+    public bool AjouterVehicule(Vehicule vehicule)
     {
+        // Vérification de la capacité disponible avant ajout
+        if (EstPlein)
+        {
+            return false; // Parking plein, ajout impossible
+        }
+        
         // Ajout du véhicule à la collection
         vehicules.Add(vehicule);
-
+        
         // Sauvegarde immédiate pour persister les modifications
         SauvegarderVehicules();
+        
+        return true; // Ajout réussi
     }
 
     /// <summary>
