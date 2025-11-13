@@ -23,7 +23,10 @@ public class Parking
     /// <param name="vehicule">Le véhicule à ajouter au parking</param>
     public void AjouterVehicule(Vehicule vehicule)
     {
+        // Ajout du véhicule à la collection
         vehicules.Add(vehicule);
+        
+        // Sauvegarde immédiate pour persister les modifications
         SauvegarderVehicules();
     }
     

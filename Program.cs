@@ -1,4 +1,5 @@
-﻿using _08_gestion_de_parking;
+﻿using System.Runtime.CompilerServices;
+using _08_gestion_de_parking;
 
 /// <summary>
 /// Point d'entrée principal de l'application de gestion de parking.
@@ -44,7 +45,7 @@ class Program
             switch (choix)
             {
                 case "1":
-                    // TODO: Implémenter AjouterVehicule()
+                    AjouterVehicule(parking);
                     break;
                 case "2":
                     // TODO: Implémenter ListerVehicules()
@@ -84,5 +85,74 @@ class Program
         // Pause avant fermeture complète
         Thread.Sleep(2000);
         Console.Clear();
+    }
+
+    /// <summary>
+    /// Interface utilisateur pour ajouter un véhicule au parking.
+    /// Collecte l'immatriculation et le type de véhicule via la console.
+    /// </summary>
+    /// <param name="parking">Instance du parking où ajouter le véhicule</param>
+    static void AjouterVehicule(Parking parking)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        string? immatriculation;
+        
+        // Validation de l'immatriculation avec boucle de contrôle
+        do
+        {
+            Console.Write("Immatriculation du véhicule: ");
+            Console.ResetColor();
+            immatriculation = Console.ReadLine();
+            if (string.IsNullOrEmpty(immatriculation))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nLe numéro d'immatriculation ne doit pas être vide...");
+                Console.ResetColor();
+            }
+
+        } while (string.IsNullOrEmpty(immatriculation));
+
+        // Affichage du menu de sélection du type de véhicule
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("==== Type de véhicule ====\n");
+        Console.WriteLine("1. Voiture");
+        Console.WriteLine("2. Moto");
+        Console.Write("\nChoisissez le type de véhicule (1 ou 2) : ");
+        Console.ResetColor();
+        string? choixType = Console.ReadLine();
+
+        Vehicule vehicule;
+
+        // Création du véhicule selon le type sélectionné
+        if (choixType == "1")
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nUne voiture va être ajoutée...");
+            Console.ResetColor();
+            vehicule = new Voiture(immatriculation.Trim(), DateTime.Now);
+        }
+        else if (choixType == "2")
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nUne moto va être ajoutée...");
+            Console.ResetColor();
+            vehicule = new Moto(immatriculation.Trim(), DateTime.Now);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Type de véhicule invalide. Opération annulée.\n");
+            Console.ResetColor();
+            return;
+        }
+
+        // Ajout du véhicule au parking
+        parking.AjouterVehicule(vehicule);
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\nVéhicule ajouté avec succès !");
+        Console.ResetColor();
+
     }
 }
