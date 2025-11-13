@@ -12,3 +12,4 @@
 /home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.pdb
 /home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.genruntimeconfig.cache
 /home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/ref/08_gestion_de_parking.dll
+/home/narmer/DEV/C#/POO/08_gestion_de_parking/obj/Debug/net9.0/08_gestion_de_parking.sourcelink.json
