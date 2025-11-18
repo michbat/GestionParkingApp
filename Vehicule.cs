@@ -33,4 +33,20 @@ public abstract class Vehicule(string immatriculation, DateTime heureEntree)
     /// Varie selon le type de véhicule et la durée de stationnement.
     /// </summary>
     public double Frais { get; private set; }
+
+    /// <summary>
+    /// Enregistre la sortie du véhicule et calcule les frais de stationnement.
+    /// Le tarif varie selon le type de véhicule : 10€ pour une voiture, 5€ pour une moto.
+    /// </summary>
+    public void Sortir()
+    {
+        // Enregistrement de l'heure de sortie
+        HeureSortie = DateTime.Now;
+        
+        // Détermination du tarif selon le type de véhicule
+        int tarif = this is Voiture ? 10 : 5;
+        
+        // Affectation des frais calculés
+        Frais = tarif;
+    }
 }

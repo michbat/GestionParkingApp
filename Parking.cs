@@ -96,4 +96,21 @@ public class Parking
         }
     }
 
+    /// <summary>
+    /// Retire un véhicule du parking après calcul des frais de stationnement.
+    /// Enregistre l'heure de sortie, calcule les frais, sauvegarde puis supprime le véhicule de la liste.
+    /// </summary>
+    /// <param name="vehicule">Le véhicule à retirer du parking</param>
+    public void RetirerVehicule(Vehicule vehicule)
+    {
+        // Enregistrement de la sortie et calcul des frais
+        vehicule.Sortir();
+        
+        // Sauvegarde avant suppression pour conserver l'historique
+        SauvegarderVehicules();
+        
+        // Retrait du véhicule de la collection
+        vehicules.Remove(vehicule);
+    }
+
 }

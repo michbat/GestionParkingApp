@@ -52,7 +52,7 @@ class Program
                     AfficherVehicules(parking);
                     break;
                 case "3":
-                    // TODO: Implémenter RetirerVehicule()
+                    SortirVehicule(parking);
                     break;
                 case "4":
                     // TODO: Implémenter ConsulterStatistiques()
@@ -197,5 +197,47 @@ class Program
             Console.ResetColor();
         }
 
+    }
+    /// <summary>
+    /// Interface utilisateur pour retirer un véhicule du parking.
+    /// Recherche le véhicule par immatriculation, calcule les frais et l'affiche à l'utilisateur.
+    /// </summary>
+    /// <param name="parking">Instance du parking d'où retirer le véhicule</param>
+    static void SortirVehicule(Parking parking)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("Immatriculation  du véhicule à retirer: ");
+        Console.ResetColor();
+        var immatriculation = Console.ReadLine();
+
+        Vehicule? vehicule = null;
+
+        // Recherche du véhicule par immatriculation
+        foreach (var v in parking.Vehicules)
+        {
+            if (v.Immatriculation == immatriculation)
+            {
+                vehicule = v;
+                break;
+            }
+        }
+
+        // Traitement selon résultat de la recherche
+        if (vehicule != null)
+        {
+            // Retrait du véhicule et affichage des frais
+            parking.RetirerVehicule(vehicule);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Véhicule retiré avec succès! Frais: {vehicule.Frais} €");
+            Console.ResetColor();
+        }
+        else
+        {
+            // Véhicule introuvable
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Véhicule non trouvé");
+            Console.ResetColor();
+        }
     }
 }
