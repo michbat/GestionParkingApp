@@ -55,7 +55,7 @@ class Program
                     SortirVehicule(parking);
                     break;
                 case "4":
-                    // TODO: Implémenter ConsulterStatistiques()
+                    ConsulterStatistiques(parking);
                     break;
                 case "5":
                     Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -239,5 +239,23 @@ class Program
             Console.WriteLine($"Véhicule non trouvé");
             Console.ResetColor();
         }
+    }
+    
+    /// <summary>
+    /// Affiche les statistiques du parking incluant les places disponibles et les gains totaux de la journée.
+    /// Fournit une vue d'ensemble de l'état actuel du parking et de sa rentabilité.
+    /// </summary>
+    /// <param name="parking">Instance du parking dont consulter les statistiques</param>
+    static void ConsulterStatistiques(Parking parking)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("==== Statistiques du parking ====");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Places disponibles : {parking.PlacesDisponibles()}");
+        Console.WriteLine($"Gains Totaux de la journée: {parking.CalculerGainsTotal()} €\n");
+        Console.ResetColor();
     }
 }
