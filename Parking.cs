@@ -43,6 +43,18 @@ public class Parking
     /// </summary>
     /// <param name="vehicule">Le véhicule à ajouter au parking</param>
     /// <returns>True si l'ajout a réussi, False si le parking est plein</returns>
+
+    /// <summary>
+    /// Cumul des gains générés par le parking depuis le début de la journée.
+    /// Réinitialisé automatiquement à minuit.
+    /// </summary>
+    private double gainTotal = 0;
+    
+    /// <summary>
+    /// Nom du fichier CSV utilisé pour la persistance des gains journaliers.
+    /// </summary>
+    private const string FichierGains = "gains.csv";
+    
     public bool AjouterVehicule(Vehicule vehicule)
     {
         // Vérification de la capacité disponible avant ajout
@@ -50,13 +62,13 @@ public class Parking
         {
             return false; // Parking plein, ajout impossible
         }
-        
+
         // Ajout du véhicule à la collection
         vehicules.Add(vehicule);
-        
+
         // Sauvegarde immédiate pour persister les modifications
         SauvegarderVehicules();
-        
+
         return true; // Ajout réussi
     }
 
@@ -105,12 +117,65 @@ public class Parking
     {
         // Enregistrement de la sortie et calcul des frais
         vehicule.Sortir();
-        
+        gainTotal += vehicule.Frais;
+
         // Sauvegarde avant suppression pour conserver l'historique
         SauvegarderVehicules();
-        
+        SauvegarderGains();
+
         // Retrait du véhicule de la collection
         vehicules.Remove(vehicule);
+    }
+    
+    /// <summary>
+    /// Calcule le nombre de places de stationnement encore disponibles dans le parking.
+    /// </summary>
+    /// <returns>Le nombre de places libres (capacité maximale moins véhicules présents)</returns>
+    public int PlacesDisponibles() => CAPACITE_MAX - vehicules.Count;
+    
+    /// <summary>
+    /// Sauvegarde les gains actuels dans le fichier CSV avec la date du jour.
+    /// Format: GainTotal,Date(yyyy-MM-dd)
+    /// </summary>
+    private void SauvegarderGains()
+    {
+        using StreamWriter writer = new(FichierGains);
+
+        writer.WriteLine($"{gainTotal}, {DateTime.Now:yyyy-MM-dd}");
+    }
+
+    /// <summary>
+    /// Retourne le total des gains accumulés depuis le début de la journée.
+    /// </summary>
+    /// <returns>Le montant total des gains journaliers en euros</returns>
+    public double CalculerGainsTotal()
+    {
+        return gainTotal;
+    }
+    
+    /// <summary>
+    /// Charge les gains sauvegardés depuis le fichier CSV.
+    /// Si la date sauvegardée correspond à aujourd'hui, restaure le montant des gains.
+    /// Sinon, réinitialise les gains à zéro (nouveau jour).
+    /// </summary>
+    public void ChargerGains()
+    {
+        if (File.Exists(FichierGains))
+        {
+            using StreamReader reader = new(FichierGains);
+            string? ligne = reader.ReadLine();
+
+            if (ligne != null)
+            {
+                string[] data = ligne.Split(",");
+                double savedGains = double.Parse(data[0]);
+                string saveDate = data[1];
+                string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                gainTotal = (saveDate == todayDate) ? savedGains : 0;
+            }
+
+        }
     }
 
 }
